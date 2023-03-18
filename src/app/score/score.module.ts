@@ -10,6 +10,7 @@ import { TeamGameResultsComponent } from './pages';
 import { API_URLS, URL_CONSTANTS } from './constants';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TeamStatsInterceptor } from './interceptors';
+import { GameResultBadgeComponent } from './components';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { TeamStatsInterceptor } from './interceptors';
     ResultsCardListComponent,
     TeamsResultsTrackerComponent,
     TeamGameResultsComponent,
+    GameResultBadgeComponent,
   ],
   imports: [CommonModule, HttpClientModule, ScoreRoutingModule],
   providers: [

@@ -1,7 +1,20 @@
 <div class="d-flex align-items-center">
-  <select #selector [disabled]="!teams.length" class="form-select w-25" id="teamSelect">
+  <select
+    #selector
+    [disabled]="!teams.length"
+    class="form-select w-25"
+    id="teamSelect"
+  >
     <option *ngIf="!teams.length" selected>Loading...</option>
-    <option [value]="team.id" *ngFor="let team of teams">{{ team.full_name }}</option>
+    <option *ngFor="let team of teams" [value]="team.id">
+      {{ team.full_name }}
+    </option>
   </select>
-  <button (click)="selectNewTeam(selector.value)" class="btn btn-primary ms-3" id="trackBtn">Track team</button>
+  <button
+    (click)="selectNewTeam(selector.value)"
+    class="btn btn-primary ms-3"
+    id="trackBtn"
+  >
+    Track team
+  </button>
 </div>

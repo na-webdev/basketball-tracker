@@ -20,7 +20,6 @@ export class TeamsResultsTrackerComponent implements OnInit {
   ngOnInit() {
     this.teams$ = this.teamStatsService.teams$;
     this.trackedTeams$ = this.teamStatsService.trackedTeams$;
-    // this.teamStatsService.getTeamResultsByPeriod(12, 12);
   }
 
   trackTeam(id: number) {

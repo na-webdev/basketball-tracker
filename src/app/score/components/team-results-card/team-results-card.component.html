@@ -1,53 +1,49 @@
-<div class="card shadow-sm">
+<div class="card shadow-lg">
   <div class="card-body">
     <div class="d-flex justify-content-between">
-      <h5 class="card-title">{{ team.full_name }} [{{ team.abbreviation }}]</h5>
+      <h4 class="card-title">{{ team.full_name }} [{{ team.abbreviation }}]</h4>
       <button
         (click)="removeCard(team.id)"
         class="btn-close shadow-none"
+        id="remove{{ team.abbreviation }}"
       ></button>
     </div>
-    <h6 class="card-subtitle mb-2 text-muted">{{ team.division }}</h6>
+    <h5 class="card-subtitle mb-4 text-muted">{{ team.division }}</h5>
     <div class="row">
-      <div class="col-7">
+      <div class="col-6">
         <div>Results of the past 12 days:</div>
         <div
-          class="d-flex align-items-center mb-3 flex-wrap"
-          [ngStyle]="{ gap: '5px' }"
+          [ngStyle]="{ gap: '8px' }"
+          class="d-flex align-items-center mt-2 mb-4 flex-wrap"
         >
-          <div
-            class="rounded-circle d-flex align-items-center justify-content-center text-light"
-            [ngStyle]="{
-              'width.px': 22,
-              'font-size.px': 14
-            }"
-            [ngClass]="{
-              'bg-danger': score === 'L',
-              'bg-success': score === 'W',
-              'bg-light': score === 'D'
-            }"
-            *ngFor="let score of team.lastGamesResults; let first = first"
-          >
-            {{ score }}
-          </div>
+          <score-game-result-badge
+            *ngFor="let result of team.lastGamesResults"
+            [gameResult]="result"
+          ></score-game-result-badge>
         </div>
         <p>
           Avg pts scored: <b>{{ team.avgPtsScored }}</b>
         </p>
-
-        Avg pts conceded: <b>{{ team.avgPtsConceded }}</b>
+        <p>
+          Avg pts conceded: <b>{{ team.avgPtsConceded }}</b>
+        </p>
       </div>
-      <div  class="col-5">
-
-      <img
-        class="img-fluid"
-        src="https://interstate21.com/nba-logos/{{
-          team.abbreviation | uppercase
-        }}.png"
-        alt="{{ team.abbreviation }}"
-      />
+      <div class="col-6">
+        <img
+          alt="{{ team.abbreviation }}"
+          class="img-fluid"
+          src="https://interstate21.com/nba-logos/{{
+            team.abbreviation | uppercase
+          }}.png"
+        />
       </div>
     </div>
-    <a href="#" class="btn btn-success">See game results >></a>
+    <a
+      id="results{{ team.abbreviation }}"
+      class="btn btn-success"
+      routerLink="/results/{{ team.id }}"
+    >
+      See game results >>
+    </a>
   </div>
 </div>

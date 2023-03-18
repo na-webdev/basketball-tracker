@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { URL_CONSTANTS } from '../constants';
 import { GameI, GameResult, UrlConstantsI } from '../interfaces';
 import { TeamI } from '../interfaces';
-import { BehaviorSubject, map, take, tap } from 'rxjs';
+import { BehaviorSubject, finalize, map, take, tap } from 'rxjs';
 import { NbaApiResponseI } from '../interfaces';
 
 @Injectable({
@@ -18,15 +18,15 @@ export class TeamStatsService {
   games$ = this.gamesSubject.asObservable();
 
   private trackedTeamsSubject = new BehaviorSubject<TeamI[]>([]);
-  trackedTeams$ = this.trackedTeamsSubject
-    .asObservable()
-    .pipe(map((teamMap) => Object.values(teamMap)));
+  trackedTeams$ = this.trackedTeamsSubject.asObservable();
   private readonly NBA_API: string;
+  private requestSent: boolean;
   constructor(
     private http: HttpClient,
     @Inject(URL_CONSTANTS) private API_URLS: UrlConstantsI
   ) {
     this.NBA_API = this.API_URLS.NBA_API;
+    this.requestSent = false;
   }
 
   getAllNBATeams() {
@@ -47,14 +47,27 @@ export class TeamStatsService {
       (team) => team.id === teamId
     );
 
-    if (!team)
+    if (!team && !this.requestSent) {
+      this.requestSent = true;
       this.http
         .get<NbaApiResponseI<GameI[]>>(`${this.NBA_API}/games?${query}`)
         .pipe(
           take(1),
-          tap((res) => this.registerGameResultsToTeam(teamId, res.data))
+          tap((res) => this.registerGameResultsToTeam(teamId, res.data)),
+          finalize(() => (this.requestSent = false))
         )
         .subscribe();
+    }
+  }
+  getTeamGameResultsAsObs(teamId: number, periodInDays: number) {
+    const query = this.createGameResultsQuery(teamId, periodInDays);
+
+    return this.http
+      .get<NbaApiResponseI<GameI[]>>(`${this.NBA_API}/games?${query}`)
+      .pipe(
+        take(1),
+        map((res) => res.data)
+      );
   }
 
   registerGameResultsToTeam(teamId: number, playedGames: GameI[]) {

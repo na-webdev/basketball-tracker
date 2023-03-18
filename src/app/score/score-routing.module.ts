@@ -5,6 +5,7 @@ import {
   TeamGameResultsComponent,
   TeamsResultsTrackerComponent,
 } from './pages';
+import { LatestGameResultsResolver } from './resolvers';
 
 const routes: Routes = [
   {
@@ -12,7 +13,11 @@ const routes: Routes = [
     component: HomeComponent,
     children: [
       { path: '', component: TeamsResultsTrackerComponent },
-      { path: 'results/:teamCode', component: TeamGameResultsComponent },
+      {
+        path: 'results/:teamId',
+        component: TeamGameResultsComponent,
+        resolve: { games: LatestGameResultsResolver },
+      },
     ],
   },
 ];
@@ -20,5 +25,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
+  providers: [LatestGameResultsResolver],
 })
 export class ScoreRoutingModule {}
