@@ -17,6 +17,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "zone.js"
+            ],
             "outputPath": "dist/basketball-tracker",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -34,6 +37,7 @@
               "src/styles.scss"
             ],
             "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ]
           },
           "configurations": {
