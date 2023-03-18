@@ -1,3 +1,5 @@
+import { GameResult } from './game.interface';
+
 export interface TeamI {
   id: number;
   abbreviation: string;
@@ -8,5 +10,5 @@ export interface TeamI {
   name: string;
   avgPtsScored?: number;
   avgPtsConceded?: number;
-  last_games?: ('W' | 'L' | 'D')[];
+  lastGamesResults?: GameResult[];
 }
