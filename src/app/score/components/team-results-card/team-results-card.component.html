@@ -1,1 +1,53 @@
-<p>team-results-card works!</p>
+<div class="card shadow-sm">
+  <div class="card-body">
+    <div class="d-flex justify-content-between">
+      <h5 class="card-title">{{ team.full_name }} [{{ team.abbreviation }}]</h5>
+      <button
+        (click)="removeCard(team.id)"
+        class="btn-close shadow-none"
+      ></button>
+    </div>
+    <h6 class="card-subtitle mb-2 text-muted">{{ team.division }}</h6>
+    <div class="row">
+      <div class="col-7">
+        <div>Results of the past 12 days:</div>
+        <div
+          class="d-flex align-items-center mb-3 flex-wrap"
+          [ngStyle]="{ gap: '5px' }"
+        >
+          <div
+            class="rounded-circle d-flex align-items-center justify-content-center text-light"
+            [ngStyle]="{
+              'width.px': 22,
+              'font-size.px': 14
+            }"
+            [ngClass]="{
+              'bg-danger': score === 'L',
+              'bg-success': score === 'W',
+              'bg-light': score === 'D'
+            }"
+            *ngFor="let score of team.last_games; let first = first"
+          >
+            {{ score }}
+          </div>
+        </div>
+        <p>
+          Avg pts scored: <b>{{ team.avgPtsScored }}</b>
+        </p>
+
+        Avg pts conceded: <b>{{ team.avgPtsConceded }}</b>
+      </div>
+      <div  class="col-5">
+
+      <img
+        class="img-fluid"
+        src="https://interstate21.com/nba-logos/{{
+          team.abbreviation | uppercase
+        }}.png"
+        alt="{{ team.abbreviation }}"
+      />
+      </div>
+    </div>
+    <a href="#" class="btn btn-success">See game results >></a>
+  </div>
+</div>

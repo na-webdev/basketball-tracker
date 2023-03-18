@@ -4,6 +4,7 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
+  HttpHeaders,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -15,6 +16,12 @@ export class TeamStatsInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    return next.handle(request);
+    const modifiedRequest = request.clone({
+      headers: new HttpHeaders({
+        'X-RapidAPI-Key': '2QMXSehDLSmshDmRQcKUIAiQjIZAp1UvKUrjsnewgqSP6F5oBX',
+        'X-RapidAPI-Host': 'free-nba.p.rapidapi.com',
+      }),
+    });
+    return next.handle(modifiedRequest);
   }
 }

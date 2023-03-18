@@ -1,1 +1,3 @@
-<p>results-card-list works!</p>
+<div class="row pt-4 g-2">
+  <score-team-results-card (removeTeam)="handleRemoveTeam($event)" [team]="team" class="col-12 col-lg-6" *ngFor="let team of teams"></score-team-results-card>
+</div>
