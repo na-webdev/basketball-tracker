@@ -21,15 +21,14 @@ export class TeamStatsService {
   private trackedTeamsSubject = new BehaviorSubject<TeamI[]>([]);
   trackedTeams$ = this.trackedTeamsSubject.asObservable();
 
+  private requestSent = false;
   private readonly NBA_API: string;
-  private requestSent: boolean;
 
   constructor(
     private http: HttpClient,
     @Inject(URL_CONSTANTS) private API_URLS: UrlConstantsI
   ) {
     this.NBA_API = this.API_URLS.NBA_API;
-    this.requestSent = false;
   }
 
   getAllNBATeams() {

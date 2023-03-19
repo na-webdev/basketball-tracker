@@ -7,6 +7,7 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ENVIRONMENT } from '../../../environments';
 
 @Injectable()
 export class TeamStatsInterceptor implements HttpInterceptor {
@@ -18,8 +19,8 @@ export class TeamStatsInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<unknown>> {
     const modifiedRequest = request.clone({
       headers: new HttpHeaders({
-        'X-RapidAPI-Key': '2QMXSehDLSmshDmRQcKUIAiQjIZAp1UvKUrjsnewgqSP6F5oBX',
-        'X-RapidAPI-Host': 'free-nba.p.rapidapi.com',
+        'X-RapidAPI-Key': ENVIRONMENT.X_RAPID_API_KEY,
+        'X-RapidAPI-Host': ENVIRONMENT.X_RAPID_API_HOST,
       }),
     });
     return next.handle(modifiedRequest);

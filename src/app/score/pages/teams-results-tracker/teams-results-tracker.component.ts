@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { TeamI } from '../../interfaces';
 import { TeamStatsService } from '../../services';
+import { GAME_RESULTS_PERIOD } from '../../constants';
 
 @Component({
   selector: 'score-teams-results-tracker',
@@ -20,7 +21,7 @@ export class TeamsResultsTrackerComponent implements OnInit {
   }
 
   trackTeam(id: number) {
-    this.teamStatsService.getTeamResultsByPeriod(id, 12);
+    this.teamStatsService.getTeamResultsByPeriod(id, GAME_RESULTS_PERIOD);
   }
 
   handleRemoveTrackedTeam(id: number) {

@@ -2,12 +2,9 @@
   (selectTeam)="trackTeam($event)"
   [teams]="(teams$ | async) || []"
 ></score-team-selector>
-<ng-container *ngIf="trackedTeams$ | async as teamsList; else loading">
+<ng-container *ngIf="trackedTeams$ | async as teamsList">
   <score-results-card-list
     (removeTrackedTeam)="handleRemoveTrackedTeam($event)"
     [teams]="teamsList"
   ></score-results-card-list>
 </ng-container>
-<ng-template #loading>
-  <p>Loading...</p>
-</ng-template>

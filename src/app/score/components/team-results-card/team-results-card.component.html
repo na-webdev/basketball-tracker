@@ -11,7 +11,7 @@
     <h5 class="card-subtitle mb-4 text-muted">{{ team.division }}</h5>
     <div class="row">
       <div class="col-6">
-        <div>Results of the past 12 days:</div>
+        <div>Results of the past {{ gameResultsPeriod }} days:</div>
         <div
           [ngStyle]="{ gap: '8px' }"
           class="d-flex align-items-center mt-2 mb-4 flex-wrap"
@@ -39,8 +39,8 @@
       </div>
     </div>
     <a
-      id="results{{ team.abbreviation }}"
       class="btn btn-success"
+      id="results{{ team.abbreviation }}"
       routerLink="/results/{{ team.id }}"
     >
       See game results >>
