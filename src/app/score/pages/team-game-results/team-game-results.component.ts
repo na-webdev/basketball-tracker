@@ -20,7 +20,6 @@ export class TeamGameResultsComponent implements OnInit {
         tap((data) => {
           this.games = data['games'];
           const game = this.games[0];
-          console.log('GAME', game);
           if (teamId === game.home_team.id) this.team = game.home_team;
           else if (teamId === game.visitor_team.id)
             this.team = game.visitor_team;
