@@ -12,7 +12,7 @@ const routes: Routes = [
     path: '',
     component: HomeComponent,
     children: [
-      { path: '', component: TeamsResultsTrackerComponent },
+      { path: '', component: TeamsResultsTrackerComponent, pathMatch: 'full' },
       {
         path: 'results/:teamId',
         component: TeamGameResultsComponent,

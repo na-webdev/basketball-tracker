@@ -7,13 +7,8 @@ import { GameResult } from '../../interfaces';
   styleUrls: ['./game-result-badge.component.scss'],
 })
 export class GameResultBadgeComponent implements OnInit {
-  @Input() gameResult: GameResult;
-  resultClass: string;
-
-  constructor() {
-    this.gameResult = 'D';
-    this.resultClass = 'bg-dark';
-  }
+  @Input() gameResult: GameResult = 'D';
+  resultClass = 'bg-dark';
 
   ngOnInit() {
     switch (this.gameResult) {

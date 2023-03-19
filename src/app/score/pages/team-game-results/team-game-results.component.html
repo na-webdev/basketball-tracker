@@ -1,4 +1,4 @@
-<div class="card">
+<div *ngIf="team" class="card">
   <div class="card-body">
     <h4 class="card-title">{{ team.full_name }} [{{ team.abbreviation }}]</h4>
     <h5 class="card-subtitle mb-4 text-muted">{{ team.division }}</h5>

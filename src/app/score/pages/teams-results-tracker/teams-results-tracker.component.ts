@@ -9,13 +9,10 @@ import { TeamStatsService } from '../../services';
   styleUrls: ['./teams-results-tracker.component.scss'],
 })
 export class TeamsResultsTrackerComponent implements OnInit {
-  teams$: Observable<TeamI[]>;
-  trackedTeams$: Observable<TeamI[]>;
+  teams$: Observable<TeamI[]> = of([]);
+  trackedTeams$: Observable<TeamI[]> = of([]);
 
-  constructor(private teamStatsService: TeamStatsService) {
-    this.teams$ = of([]);
-    this.trackedTeams$ = of([]);
-  }
+  constructor(private teamStatsService: TeamStatsService) {}
 
   ngOnInit() {
     this.teams$ = this.teamStatsService.teams$;

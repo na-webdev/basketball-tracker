@@ -9,12 +9,9 @@ import { GameI, TeamI } from '../../interfaces';
   styleUrls: ['./team-game-results.component.scss'],
 })
 export class TeamGameResultsComponent implements OnInit {
-  team: TeamI;
-  games: GameI[];
-  constructor(private route: ActivatedRoute) {
-    this.games = [];
-    this.team = {} as TeamI;
-  }
+  team?: TeamI;
+  games: GameI[] = [];
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
     const teamId = +this.route.snapshot.params['teamId'];

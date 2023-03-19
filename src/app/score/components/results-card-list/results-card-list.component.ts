@@ -7,12 +7,8 @@ import { TeamI } from '../../interfaces';
   styleUrls: ['./results-card-list.component.scss'],
 })
 export class ResultsCardListComponent {
-  @Input() teams: TeamI[];
+  @Input() teams: TeamI[] = [];
   @Output() removeTrackedTeam = new EventEmitter<number>();
-
-  constructor() {
-    this.teams = [];
-  }
 
   handleRemoveTeam(id: number) {
     this.removeTrackedTeam.emit(id);

@@ -12,6 +12,7 @@ import { NbaApiResponseI } from '../interfaces';
 export class TeamStatsService {
   private teamsSubject = new BehaviorSubject<TeamI[]>([]);
   teams$ = this.teamsSubject.asObservable();
+
   private gamesSubject = new BehaviorSubject<{ [property: string]: GameI[] }>(
     {}
   );
@@ -19,8 +20,10 @@ export class TeamStatsService {
 
   private trackedTeamsSubject = new BehaviorSubject<TeamI[]>([]);
   trackedTeams$ = this.trackedTeamsSubject.asObservable();
+
   private readonly NBA_API: string;
   private requestSent: boolean;
+
   constructor(
     private http: HttpClient,
     @Inject(URL_CONSTANTS) private API_URLS: UrlConstantsI
@@ -59,7 +62,7 @@ export class TeamStatsService {
         .subscribe();
     }
   }
-  getTeamGameResultsAsObs(teamId: number, periodInDays: number) {
+  getTeamResultsAsObs(teamId: number, periodInDays: number) {
     const query = this.createGameResultsQuery(teamId, periodInDays);
 
     return this.http
@@ -140,14 +143,11 @@ export class TeamStatsService {
     if (teamId === game.home_team.id) {
       if (game.home_team_score > game.visitor_team_score) return 'W';
       else if (game.home_team_score < game.visitor_team_score) return 'L';
-
-      return 'D';
-    } else {
+    } else if (teamId === game.visitor_team.id) {
       if (game.home_team_score < game.visitor_team_score) return 'W';
       else if (game.home_team_score > game.visitor_team_score) return 'L';
-
-      return 'D';
     }
+    return 'D';
   }
 
   calculateAvgPts(points: number[]) {

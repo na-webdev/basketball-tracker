@@ -7,12 +7,8 @@ import { TeamI } from '../../interfaces';
   styleUrls: ['./team-results-card.component.scss'],
 })
 export class TeamResultsCardComponent {
-  @Input() team: TeamI;
+  @Input() team?: TeamI;
   @Output() removeTeam = new EventEmitter<number>();
-
-  constructor() {
-    this.team = {} as TeamI;
-  }
 
   removeCard(teamId: number) {
     this.removeTeam.emit(teamId);
