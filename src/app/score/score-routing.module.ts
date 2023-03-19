@@ -14,7 +14,7 @@ const routes: Routes = [
     children: [
       { path: '', component: TeamsResultsTrackerComponent, pathMatch: 'full' },
       {
-        path: 'results/:teamId',
+        path: 'results/:teamCode',
         component: TeamGameResultsComponent,
         resolve: { games: LatestGameResultsResolver },
       },

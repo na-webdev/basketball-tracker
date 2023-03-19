@@ -17,7 +17,7 @@ export class LatestGameResultsResolver implements Resolve<GameI[]> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<GameI[]> {
-    const teamId = route.paramMap.get('teamId') || '';
+    const teamId = route.paramMap.get('teamCode') || '';
     return this.teamStatsService.games$.pipe(
       map((gameMap) => gameMap[teamId]),
       switchMap((games) => {

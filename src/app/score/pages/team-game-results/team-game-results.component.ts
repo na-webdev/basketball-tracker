@@ -17,7 +17,7 @@ export class TeamGameResultsComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    const teamId = +this.route.snapshot.params['teamId'];
+    const teamId = +this.route.snapshot.params['teamCode'];
     this.route.data
       .pipe(
         tap((data) => {
