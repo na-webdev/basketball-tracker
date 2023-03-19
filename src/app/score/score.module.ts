@@ -11,6 +11,7 @@ import { API_URLS, URL_CONSTANTS } from './constants';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TeamStatsInterceptor } from './interceptors';
 import { GameResultBadgeComponent } from './components';
+import { TeamStatsService } from './services';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { GameResultBadgeComponent } from './components';
       useClass: TeamStatsInterceptor,
       multi: true,
     },
+    TeamStatsService,
   ],
 })
 export class ScoreModule {}

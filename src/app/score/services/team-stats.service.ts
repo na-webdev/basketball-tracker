@@ -6,9 +6,7 @@ import { TeamI } from '../interfaces';
 import { BehaviorSubject, finalize, map, take, tap } from 'rxjs';
 import { NbaApiResponseI } from '../interfaces';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class TeamStatsService {
   private teamsSubject = new BehaviorSubject<TeamI[]>([]);
   teams$ = this.teamsSubject.asObservable();
